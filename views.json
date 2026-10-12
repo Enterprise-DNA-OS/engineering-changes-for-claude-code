@@ -6,11 +6,11 @@
     "sections": [
       {
         "title": "Change board",
-        "sql": "select * from change_board order by due"
+        "sql": "select name as change,number as part,code as revision,author as owner,due,status,reviewer from change_board order by due"
       },
       {
         "title": "Release gaps",
-        "sql": "select * from release_gaps order by number"
+        "sql": "select number as part,code as revision,gap from release_gaps order by number"
       },
       {
         "title": "Component status",
