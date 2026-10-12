@@ -1,43 +1,22 @@
-# Engineering Changes for Claude Code: operating instructions
+# Engineering Changes for Claude Code
 
-This file is the brain. Claude Code reads it at the start of every session. It says who this is for, how work gets done, and the one right way to do each recurring job.
+Read README.md and the matching .claude/commands recipe. All runtimes use the same scripts.
 
-## Who this is for
+- Start every answer about records with a CLI read. Never invent evidence or approval.
+- Harbour Engineering demo data is fictional. Keep it separate from real records.
+- Stay on main. Never change repository visibility, send messages or publish output.
+- Use npm run engineering -- <command>. --json gives machine-readable output.
+- Writes require --actor. This is attribution, not authentication. Do not claim a person's approval unless they actually gave it.
+- Resolve ambiguous names using the printed candidate IDs. Never guess.
+- Released revisions are immutable through the CLI. Create a new revision for a new design. Approved revisions are frozen. Do not bypass gates with direct updates.
+- Keep CAD files, evidence and backups private. Evidence links are references, not verified proofs.
+- Read docs/compliance.md before explaining any compliance flag. Engineers decide whether evidence is sufficient.
+- Run imports with --dry-run first. Follow docs/replace-openbom.md and never invent a missing export column.
+- Back up before migrations. Never edit an applied migration. Add the next migration, update commands and tests, then run npm test on disposable data.
+- /customise changes the user's authorised fields or rules. /new-view creates a read-only report. Neither creates public or editing screens.
+- Tests ignore normal DATABASE_URL. TEST_DATABASE_URL must be an empty disposable database.
+- Generated handovers and weekly reviews stay private drafts. Never send them.
 
-- **Business:** [YOUR BUSINESS]
-- **Operator:** [YOUR NAME], [your role]
-- **What matters most:** [the one or two outcomes you care about]
+## Files
 
-Fill this in once. A worker with context knows. A worker without it guesses.
-
-## How to work
-
-1. **Take a brief, not a script.** The operator describes the outcome. You run the right command and present the answer.
-2. **Read before you write.** Before drafting anything about a record, read its full history first.
-3. **Plain language.** Short sentences. No filler. Numbers in tables.
-4. **Silent success, loud problems.** No play-by-play. Say what broke and what you did about it.
-5. **Stop at the line.** Anything that sends, deletes, or faces a customer waits for a yes in this session.
-
-## Routing table: one right way for each recurring job
-
-| When the operator asks for... | Use this |
-|---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
-
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
-
-## Hard rules
-
-- Never send email or messages from here. Draft to `drafts/`, a person sends.
-- Never delete records without an explicit yes in this session. Prefer marking closed or archived.
-- Never invent a record. If a name is ambiguous, list the candidates and ask.
-- The database is the source of truth. If the answer is not in it, say so.
-
-## Where things live
-
-- `scripts/` the CLI. `scripts/lib/db.mjs` picks `DATABASE_URL` (Postgres, Supabase) or the embedded database in `.data/`.
-- `supabase/migrations/` the schema, plain SQL. `npm run migrate` applies it.
-- `.claude/commands/` the slash commands. Add one every time the same ask comes twice.
-- `docs/` the thesis and the guide for moving off OpenBOM.
-
-Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/openbom
+scripts/engineering.mjs holds the domain CLI. supabase/migrations holds the schema. scripts/lib/db.mjs selects the local or hosted database. brand.json, views.json and documents.json configure private reports. AGENTS.md points every runtime here.

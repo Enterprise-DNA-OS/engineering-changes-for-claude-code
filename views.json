@@ -1,13 +1,30 @@
 [
   {
-    "name": "week",
-    "title": "This week",
-    "subtitle": "Engineering Changes for Claude Code: what needs attention, rendered by npm run view",
+    "name": "engineering-week",
+    "title": "Engineering change review",
+    "subtitle": "Private read-only review",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Change board",
+        "sql": "select * from change_board order by due"
+      },
+      {
+        "title": "Release gaps",
+        "sql": "select * from release_gaps order by number"
+      },
+      {
+        "title": "Component status",
+        "sql": "select * from component_usage order by assembly"
+      }
+    ]
+  },
+  {
+    "name": "release-handover",
+    "title": "Released design information",
+    "sections": [
+      {
+        "title": "Released revisions",
+        "sql": "select number,name,code,purpose,test_evidence,use_instructions from revision_register where status='released' order by number"
       }
     ]
   }

@@ -1,11 +1,39 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
+    "name": "change-notice",
+    "title": "Engineering change notice draft",
+    "for_each": "select id,name from changes",
     "file": "name",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Change and approval",
+        "sql": "select name,reason,author,due,status,reviewer,approved_at,release_note from changes where id=$1"
+      },
+      {
+        "title": "Design information",
+        "sql": "select rr.number,rr.name,rr.code,rr.purpose,rr.test_evidence,rr.use_instructions from revision_register rr join changes c on c.revision_id=rr.id where c.id=$1"
+      }
+    ]
+  },
+  {
+    "name": "design-handover",
+    "title": "Design handover draft",
+    "for_each": "select id,number||'-'||code as name from revision_register",
+    "file": "name",
+    "sections": [
+      {
+        "title": "Revision and safe-use information",
+        "sql": "select number,name,code,status,purpose,test_evidence,use_instructions from revision_register where id=$1"
+      },
+      {
+        "title": "Direct components",
+        "sql": "select p.number,r.code,r.status,b.quantity,b.unit from bom_lines b join revisions r on r.id=b.child_id join parts p on p.id=r.part_id where b.parent_id=$1"
+      },
+      {
+        "title": "Unresolved gaps",
+        "note": "A blank list means these record checks passed. An engineer must assess design safety.",
+        "sql": "select gap from release_gaps where id=$1"
+      }
     ]
   }
 ]

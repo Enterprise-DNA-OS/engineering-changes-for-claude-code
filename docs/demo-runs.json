@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Late engineering decisions",
+    "ask": "Which engineering changes are overdue?",
+    "command": "npm run engineering -- overdue-changes",
+    "output": "  id                                    name                   number    code  author  due         status  reviewer  days_past_due\n  ------------------------------------  ---------------------  --------  ----  ------  ----------  ------  --------  -------------\n  40000000-0000-4000-8000-000000000001  Washdown guard review  PUMP-100  B     Moana   2026-10-03  open              9"
+  },
+  {
+    "title": "Obsolete components",
+    "ask": "Which assemblies still specify an obsolete part?",
+    "command": "npm run engineering -- obsolete-parts",
+    "output": "  assembly  assembly_revision  assembly_status  component  component_revision  component_status  quantity  unit\n  --------  -----------------  ---------------  ---------  ------------------  ----------------  --------  ----\n  PUMP-100  B                  draft            GUARD-20   A                   obsolete          1.0000    each"
+  },
+  {
+    "title": "Shared component exposure",
+    "ask": "Which components are used by more than one assembly?",
+    "command": "npm run engineering -- shared-components",
+    "output": "  component  component_revision  assemblies\n  ---------  ------------------  ----------\n  SEAL-10    A                   2"
+  }
+]

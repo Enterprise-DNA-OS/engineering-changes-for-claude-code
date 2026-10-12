@@ -1,0 +1,42 @@
+[
+  [
+    "Which engineering changes have missed their agreed date?",
+    "overdue-changes"
+  ],
+  [
+    "Which approved designs are ready for release?",
+    "release-review"
+  ],
+  [
+    "Which assemblies still specify an obsolete component?",
+    "obsolete-parts"
+  ],
+  [
+    "Which draft designs have been untouched for a month?",
+    "stale"
+  ],
+  [
+    "Which owners have the most overdue changes?",
+    "owner-load"
+  ],
+  [
+    "Which components are shared across assemblies?",
+    "shared-components"
+  ],
+  [
+    "Which revisions lack test evidence or safe-use information?",
+    "missing-evidence"
+  ],
+  [
+    "Which assemblies depend on a particular component revision?",
+    "where-used --revision=\"SEAL-10 / A\""
+  ],
+  [
+    "What quantities are required through a nested assembly?",
+    "bom --revision=\"PUMP-100 / B\""
+  ],
+  [
+    "Who recorded the last approval or design change?",
+    "history"
+  ]
+]
